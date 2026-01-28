@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class AlunoDAO {
 
     public void createAluno(String nome, String email) {
@@ -14,8 +13,7 @@ public class AlunoDAO {
         PreparedStatement psInsert = null;
         String insertSql = "INSERT INTO alunos (nome, email) VALUES (?,?)";
         ConexaoDB conexaoDB = new ConexaoDB();
-        Connection connection =  null;
-
+        Connection connection = null;
 
         //Forma moderna impedindo vazemento de memoria
         //try (Connection conexao = conexaoDB.getConnection();
@@ -38,11 +36,17 @@ public class AlunoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro no cadastro do aluno" + e.getMessage());// TODO: handle exception
-        } finally{
+        } finally {
             try {
-                if(psInsert != null) psInsert.close();
-                if(resultadoDosDados != null) resultadoDosDados.close();
-                if(connection != null) connection.close();
+                if (psInsert != null) {
+                    psInsert.close();
+                }
+                if (resultadoDosDados != null) {
+                    resultadoDosDados.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -50,7 +54,7 @@ public class AlunoDAO {
 
     }
 
-    public void selecAluno(String nome, String email) {
+    public void selectAluno(String nome, String email) {
         ConexaoDB conexaoDB = new ConexaoDB();
         Connection connection = null;
         ResultSet resultadoDosDados = null;
@@ -62,7 +66,7 @@ public class AlunoDAO {
             psSelec.setString(1, nome);
             psSelec.setString(2, email);
 
-             resultadoDosDados= psSelec.executeQuery();
+            resultadoDosDados = psSelec.executeQuery();
             System.out.println("resultado da Consulta");
 
             if (resultadoDosDados.next()) {
@@ -78,11 +82,17 @@ public class AlunoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro no achar do aluno" + e.getMessage());
-        }finally{
+        } finally {
             try {
-                if(psSelec !=null) psSelec.close();
-                if(resultadoDosDados !=null) resultadoDosDados.close();
-                if(connection != null)connection.close();
+                if (psSelec != null) {
+                    psSelec.close();
+                }
+                if (resultadoDosDados != null) {
+                    resultadoDosDados.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -108,10 +118,14 @@ public class AlunoDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Erro em atulizar o aluno" + e.getMessage());
-        }finally {
+        } finally {
             try {
-                if (psUpdate != null) psUpdate.close();
-                if (connection != null) connection.close();
+                if (psUpdate != null) {
+                    psUpdate.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -124,7 +138,7 @@ public class AlunoDAO {
         PreparedStatement psDelete = null;
         String deleteSql = "DELETE FROM alunos WHERE email = ? AND nome = ?";
         Connection connection = null;
-        
+
         try {
             connection = conexaoDB.getConnection();
 
@@ -137,8 +151,12 @@ public class AlunoDAO {
             System.out.println("Erro em Deletar o Aluno" + e.getMessage());
         } finally {
             try {
-                if (psDelete != null)  psDelete.close();
-                if (connection != null)  connection.close();
+                if (psDelete != null) {
+                    psDelete.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

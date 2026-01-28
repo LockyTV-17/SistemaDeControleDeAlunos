@@ -10,7 +10,6 @@ public class Main {
         int opcao = 0;
         AlunoDAO alunoDAO = new AlunoDAO();
 
-        
         while (opcao != 5) {
             System.out.println("\n--- SISTEMA DE ALUNOS ---");
             System.out.println("1 - Cadastrar Aluno");
@@ -34,7 +33,7 @@ public class Main {
                     nome = sc.nextLine();
                     System.out.print("Digite o Email do Aluno: ");
                     email = sc.nextLine();
-                    alunoDAO.selecAluno(nome, email);
+                    alunoDAO.selectAluno(nome, email);
                 }
                 case 3 -> {
                     String novoEmail;
@@ -59,7 +58,6 @@ public class Main {
                     System.out.println("Opção invalida");
             }
 
-            
         }
         sc.close();
     }
